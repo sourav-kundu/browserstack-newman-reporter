@@ -1,5 +1,5 @@
 {
-  "name": "newman-reporter-browserstack",
+  "name": "@beeingsourav/newman-reporter-browserstack",
   "version": "1.0.0",
   "description": "BrowserStack Test Reporting & Analytics reporter for Newman",
   "main": "./dist/index.js",
