@@ -1,6 +1,5 @@
 # BrowserStack Newman Reporter
 
-[![npm version](https://img.shields.io/npm/v/@beeingsourav/newman-reporter-browserstack)](https://www.npmjs.com/package/@beeingsourav/newman-reporter-browserstack)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 A [Newman](https://github.com/postmanlabs/newman) reporter that automatically sends test results to [BrowserStack Test Reporting & Analytics (TRA)](https://www.browserstack.com/test-reporting). Get real-time visibility into your API test runs with detailed test execution data, HTTP request logs, and console output — all on the BrowserStack dashboard.
@@ -20,20 +19,68 @@ A [Newman](https://github.com/postmanlabs/newman) reporter that automatically se
 
 - **Node.js** >= 14
 - **Newman** >= 5.3.0
+- **Git** (to clone this repository)
 - A **BrowserStack account** with Test Reporting enabled. [Sign up for free](https://www.browserstack.com/users/sign_up).
 - Your BrowserStack **username** and **access key**, available at [browserstack.com/accounts/settings](https://www.browserstack.com/accounts/settings).
 
 ## Installation
 
+> **Note:** This package is not published on npm. Install it directly from GitHub.
+
+### Option 1: Install directly from GitHub (recommended)
+
 ```bash
-npm install @beeingsourav/newman-reporter-browserstack --save-dev
+npm install github:sourav-kundu/browserstack-newman-reporter --save-dev
 ```
+
+This will clone the repo, build the package, and install it as a local dependency — no npm registry needed.
 
 You also need Newman installed:
 
 ```bash
 npm install newman --save-dev
 ```
+
+### Option 2: Clone and link locally
+
+Use this approach if you want to modify the reporter source code or develop against it:
+
+```bash
+# Clone the repository
+git clone https://github.com/sourav-kundu/browserstack-newman-reporter.git
+
+# Install dependencies and build
+cd browserstack-newman-reporter
+npm install
+npm run build
+
+# Create a global symlink
+npm link
+
+# In your test project directory, link the reporter
+cd /path/to/your/test-project
+npm link @beeingsourav/newman-reporter-browserstack
+```
+
+### Option 3: Use a local file path
+
+If you've cloned the repo alongside your project, you can reference it directly in your `package.json`:
+
+```json
+{
+  "devDependencies": {
+    "@beeingsourav/newman-reporter-browserstack": "file:../browserstack-newman-reporter"
+  }
+}
+```
+
+Then run:
+
+```bash
+npm install
+```
+
+> **Important:** For Option 2 and 3, make sure you run `npm run build` in the reporter directory first so that the `dist/` folder is generated.
 
 ## Quick Start
 
@@ -96,8 +143,8 @@ Here's a full end-to-end example starting from scratch:
 mkdir my-api-tests && cd my-api-tests
 npm init -y
 
-# 2. Install dependencies
-npm install newman @beeingsourav/newman-reporter-browserstack --save-dev
+# 2. Install dependencies (directly from GitHub)
+npm install newman github:sourav-kundu/browserstack-newman-reporter --save-dev
 
 # 3. Create browserstack.yml
 cat > browserstack.yml << 'EOF'
@@ -194,7 +241,7 @@ Add a test script to your `package.json`:
   },
   "devDependencies": {
     "newman": "^6.0.0",
-    "@beeingsourav/newman-reporter-browserstack": "^1.0.0"
+    "@beeingsourav/newman-reporter-browserstack": "github:sourav-kundu/browserstack-newman-reporter"
   }
 }
 ```
@@ -358,8 +405,12 @@ Events are batched (up to 1000 per batch, flushed every 2 seconds) for efficient
 
 ### Reporter not loading
 
-Ensure the package is installed and the full scoped name is used:
+Ensure the package is installed from GitHub and the full scoped name is used:
 ```bash
+# Reinstall from GitHub
+npm install github:sourav-kundu/browserstack-newman-reporter --save-dev
+
+# Then run
 npx newman run ./collection.json -r @beeingsourav/newman-reporter-browserstack,cli
 ```
 
@@ -400,10 +451,10 @@ See [newman-sample-api-tests](https://github.com/sourav-kundu/newman-sample-api-
 
 ## Contributing
 
-1. Clone the repository
+1. Clone the repository: `git clone https://github.com/sourav-kundu/browserstack-newman-reporter.git`
 2. Install dependencies: `npm install`
 3. Build: `npm run build`
-4. Link locally for testing: `npm link`
+4. Link locally for testing: `npm link`, then in your test project: `npm link @beeingsourav/newman-reporter-browserstack`
 
 ## License
 

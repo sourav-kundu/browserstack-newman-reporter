@@ -1,6 +1,6 @@
 {
   "name": "@beeingsourav/newman-reporter-browserstack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "BrowserStack Test Reporting & Analytics reporter for Newman",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -12,6 +12,7 @@
   "scripts": {
     "build": "npm run clean && tsc --project tsconfig.build.json",
     "clean": "rm -rf dist",
+    "prepare": "npm run build",
     "test": "jest --passWithNoTests"
   },
   "author": "BrowserStack",
